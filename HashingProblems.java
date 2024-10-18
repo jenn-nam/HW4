@@ -40,7 +40,29 @@ class HashingProblems {
          * returning 0.0 is NOT correct, as that is not the average value. Whereas
          * returning 0.0/0.0 IS correct (which would return a non-number).
          */
+        //go through the list, see if key is there
+        //then get average
 
+        //create to holder for the sum and number of keys
+       int total_sum = 0;
+       int total_keys = 0;
+
+        //starts going through list
+        for (int key : array) {
+            //checking for each key if it is in map
+            if (map.containsKey(key)) {
+                //add val of map
+                total_sum += map.get(key);
+                total_keys++;
+            }
+        }
+        //After doing the above, we can get average
+        //there must be more than 0 keys
+        if (total_keys > 0) {
+            //average
+            return (double) total_sum/total_keys;
+        }else
+            //no values found in common (as stated in directions)
          return 0.0 / 0.0;
   }
 
@@ -61,7 +83,15 @@ class HashingProblems {
        *
        * Hint: Consider iterating over the HashMap using the keySet method.
        */
+    //iterate and check each key and check for odsness
+      for (Integer key : map.keySet()) {
+          //checing for oddness
+          if (key % 2 != 0) {
+              //add val to result if it is odd
+              result.add(map.get(key));
+          }
 
+      }
 
       return result;
   }
@@ -106,11 +136,29 @@ class HashingProblems {
 
   public int twoSums(int[] numbers, int k) {
 
+
       /*
        * ADD YOUR CODE HERE
        */
+      //will use a hash set and counter to keep/store track how many times k appears
+      HashSet<Integer> tracked = new HashSet<>();
+      //counter
+      int count = 0;
 
-      return -1;
+      //iterrate the array
+      for (int num : numbers ) {
+          //check for n-k, if present then ++
+          if (tracked.contains(num - k)) {
+              count++;
+          }
+          //
+          if (tracked.contains(num + k)){
+              count++;
+          }
+          //current # added
+          tracked.add(num);
+      }
+      return count;
   }
 
 } /* end class HashingProblems */
